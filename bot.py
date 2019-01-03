@@ -48,5 +48,23 @@ async def pin(ctx, id):
 	if ctx.message.author.nick != None:
 		name = ctx.message.author.nick
 	await bot.say(name + " pinned a message: " + message.content)
+	
+@bot.command(
+name='unpin',
+description = "Unpin a message by ID",
+pass_context = True)
+async def unpin(ctx, id):
+	message = await bot.get_message(ctx.message.channel, id)
+	await bot.unpin_message(message)
+	name = ctx.message.author.name
+	if ctx.message.author.nick != None:
+		name = ctx.message.author.nick
+	await bot.say(name + " unpinned a message: " + message.content)
+	
+@bot.command(
+name='ezmark',
+description = "Ask for Mark's credit card details")
+async def ezmark():
+	await bot.say("Hey Mark, I need your credit card details real quick. Type them in here!")
 
 bot.run(TOKEN)
