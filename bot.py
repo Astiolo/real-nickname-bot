@@ -29,7 +29,7 @@ async def rename(ctx, user : discord.Member = None, newName = ""):
 	elif newName == "":
 		await bot.say("You need to specify a nickname")
 	elif ctx.message.author.id == user.id:
-		await bot.say("You can't set your own nick name. That's not how nicknames really work!")
+		await bot.say("You can't set your own nickname. That's not how nicknames really work!")
 	else:
 		await bot.change_nickname(user, newName)
 		name = ctx.message.author.name
@@ -37,5 +37,13 @@ async def rename(ctx, user : discord.Member = None, newName = ""):
 			name = ctx.message.author.nick
 		await bot.say(name + " changed " + str(user.name) + "'s name to " + newName)
 		
+@bot.command(
+	name='pin'
+	description = "Pin a message by ID",
+	pass_context = True)
+async def pin(ctx, id):
+	message = await bot.get_message(ctx.message.channel, id)
+	await pin_message(message)
+	await bot.say(ctx.message.author.nick + " pinned a message: " + message.content)
 
 bot.run(TOKEN)
