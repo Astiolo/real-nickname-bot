@@ -47,7 +47,7 @@ async def pin(ctx, id):
 	name = ctx.message.author.name
 	if ctx.message.author.nick != None:
 		name = ctx.message.author.nick
-	await bot.say(name + " pinned a message:\n" + message.content)
+	await bot.say(name + " pinned a message by " + message.author.mention + ":\n" + message.content)
 	
 @bot.command(
 name='unpin',
@@ -59,7 +59,7 @@ async def unpin(ctx, id):
 	name = ctx.message.author.name
 	if ctx.message.author.nick != None:
 		name = ctx.message.author.nick
-	await bot.say(name + " unpinned a message:\n" + message.content)
+	await bot.say(name + " unpinned a message by " + message.author.mention + ":\n" + message.content)
 	
 @bot.command(
 name='ezmark',
