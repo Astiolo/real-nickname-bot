@@ -32,10 +32,7 @@ async def rename(ctx, user : discord.Member = None, newName = ""):
 		await bot.say("You can't set your own nickname. That's not how nicknames really work!")
 	else:
 		await bot.change_nickname(user, newName)
-		name = ctx.message.author.name
-		if ctx.message.author.nick != None:
-			name = ctx.message.author.nick
-		await bot.say(name + " changed " + str(user.name) + "'s name to " + newName)
+		await bot.say(ctx.message.author.mention + " changed " + str(user.name) + "'s name to " + newName)
 		
 @bot.command(
 	name='pin',
@@ -44,10 +41,7 @@ async def rename(ctx, user : discord.Member = None, newName = ""):
 async def pin(ctx, id):
 	message = await bot.get_message(ctx.message.channel, id)
 	await bot.pin_message(message)
-	name = ctx.message.author.name
-	if ctx.message.author.nick != None:
-		name = ctx.message.author.nick
-	await bot.say(name + " pinned a message by " + message.author.mention + ":\n" + message.content)
+	await bot.say(ctx.message.author.mention + " pinned a message by " + message.author.mention + ":\n" + message.content)
 	
 @bot.command(
 name='unpin',
@@ -57,9 +51,7 @@ async def unpin(ctx, id):
 	message = await bot.get_message(ctx.message.channel, id)
 	await bot.unpin_message(message)
 	name = ctx.message.author.name
-	if ctx.message.author.nick != None:
-		name = ctx.message.author.nick
-	await bot.say(name + " unpinned a message by " + message.author.mention + ":\n" + message.content)
+	await bot.say(ctx.message.author.mention + " unpinned a message by " + message.author.mention + ":\n" + message.content)
 	
 @bot.command(
 name='ezmark',
