@@ -44,6 +44,9 @@ async def rename(ctx, user : discord.Member = None, newName = ""):
 async def pin(ctx, id):
 	message = await bot.get_message(ctx.message.channel, id)
 	await bot.pin_message(message)
-	await bot.say(ctx.message.author.nick + " pinned a message: " + message.content)
+	name = ctx.message.author.name
+		if ctx.message.author.nick != None:
+			name = ctx.message.author.nick
+	await bot.say(name + " pinned a message: " + message.content)
 
 bot.run(TOKEN)
