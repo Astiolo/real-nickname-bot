@@ -45,8 +45,8 @@ async def pin(ctx, id):
 	message = await bot.get_message(ctx.message.channel, id)
 	await bot.pin_message(message)
 	name = ctx.message.author.name
-		if ctx.message.author.nick != None:
-			name = ctx.message.author.nick
+	if ctx.message.author.nick != None:
+		name = ctx.message.author.nick
 	await bot.say(name + " pinned a message: " + message.content)
 
 bot.run(TOKEN)
