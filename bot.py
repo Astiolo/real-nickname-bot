@@ -38,7 +38,7 @@ async def rename(ctx, user : discord.Member = None, newName = ""):
 		await bot.say(name + " changed " + str(user.name) + "'s name to " + newName)
 		
 @bot.command(
-	name='pin'
+	name='pin',
 	description = "Pin a message by ID",
 	pass_context = True)
 async def pin(ctx, id):
