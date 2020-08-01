@@ -25,14 +25,14 @@ async def greet(ctx):
 async def rename(ctx, user : discord.Member = None, newName = ""):
 	#member = get_member(user)
 	if user is None:
-		await Context.send("You need to specify a user")
+		await ctx.send("You need to specify a user")
 	elif newName == "":
-		await Context.send("You need to specify a nickname")
+		await ctx.send("You need to specify a nickname")
 	elif ctx.message.author.id == user.id:
-		await Context.send("You can't set your own nickname. That's not how nicknames really work!")
+		await ctx.send("You can't set your own nickname. That's not how nicknames really work!")
 	else:
 		await user.edit(nick=newName)
-		await Context.send(ctx.message.author.mention + " changed " + str(user.name) + "'s name to " + newName)
+		await ctx.send(ctx.message.author.mention + " changed " + str(user.name) + "'s name to " + newName)
 		
 @bot.command(
 	name='pin',
@@ -41,7 +41,7 @@ async def rename(ctx, user : discord.Member = None, newName = ""):
 async def pin(ctx, id):
 	message = await bot.get_message(ctx.message.channel, id)
 	await message.pin()
-	await Context.send(ctx.message.author.mention + " pinned a message by " + message.author.mention + ":\n" + message.content)
+	await ctx.send(ctx.message.author.mention + " pinned a message by " + message.author.mention + ":\n" + message.content)
 	
 @bot.command(
 name='unpin',
@@ -51,6 +51,6 @@ async def unpin(ctx, id):
 	message = await bot.get_message(ctx.message.channel, id)
 	await message.unpin();
 	name = ctx.message.author.name
-	await Context.send(ctx.message.author.mention + " unpinned a message by " + message.author.mention + ":\n" + message.content)
+	await ctx.send(ctx.message.author.mention + " unpinned a message by " + message.author.mention + ":\n" + message.content)
 
 bot.run(TOKEN)
