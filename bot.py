@@ -25,14 +25,14 @@ async def greet(ctx):
 async def rename(ctx, user : discord.Member = None, newName = ""):
 	#member = get_member(user)
 	if user is None:
-		await bot.say("You need to specify a user")
+		await Context.send("You need to specify a user")
 	elif newName == "":
-		await bot.say("You need to specify a nickname")
+		await Context.send("You need to specify a nickname")
 	elif ctx.message.author.id == user.id:
-		await bot.say("You can't set your own nickname. That's not how nicknames really work!")
+		await Context.send("You can't set your own nickname. That's not how nicknames really work!")
 	else:
-		await bot.change_nickname(user, newName)
-		await bot.say(ctx.message.author.mention + " changed " + str(user.name) + "'s name to " + newName)
+		await user.edit(nick=newName)
+		await Context.send(ctx.message.author.mention + " changed " + str(user.name) + "'s name to " + newName)
 		
 @bot.command(
 	name='pin',
@@ -40,8 +40,8 @@ async def rename(ctx, user : discord.Member = None, newName = ""):
 	pass_context = True)
 async def pin(ctx, id):
 	message = await bot.get_message(ctx.message.channel, id)
-	await bot.pin_message(message)
-	await bot.say(ctx.message.author.mention + " pinned a message by " + message.author.mention + ":\n" + message.content)
+	await message.pin()
+	await Context.send(ctx.message.author.mention + " pinned a message by " + message.author.mention + ":\n" + message.content)
 	
 @bot.command(
 name='unpin',
@@ -49,14 +49,8 @@ description = "Unpin a message by ID",
 pass_context = True)
 async def unpin(ctx, id):
 	message = await bot.get_message(ctx.message.channel, id)
-	await bot.unpin_message(message)
+	await message.unpin();
 	name = ctx.message.author.name
-	await bot.say(ctx.message.author.mention + " unpinned a message by " + message.author.mention + ":\n" + message.content)
-	
-@bot.command(
-name='ezmark',
-description = "Ask for Mark's credit card details")
-async def ezmark():
-	await bot.say("Hey Mark, I need your credit card details real quick. Type them in here!")
+	await Context.send(ctx.message.author.mention + " unpinned a message by " + message.author.mention + ":\n" + message.content)
 
 bot.run(TOKEN)
