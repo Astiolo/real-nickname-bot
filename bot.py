@@ -39,7 +39,8 @@ async def rename(ctx, user : discord.Member = None, newName = ""):
 	description = "Pin a message by ID",
 	pass_context = True)
 async def pin(ctx, id):
-	message = await bot.get_message(ctx.message.channel, id)
+	message = await ctx.channel.fetch_message(id)
+	# message = await bot.get_message(ctx.message.channel, id)
 	await message.pin()
 	await ctx.send(ctx.message.author.mention + " pinned a message by " + message.author.mention + ":\n" + message.content)
 	
@@ -48,7 +49,8 @@ name='unpin',
 description = "Unpin a message by ID",
 pass_context = True)
 async def unpin(ctx, id):
-	message = await bot.get_message(ctx.message.channel, id)
+	message = await ctx.channel.fetch_message(id)
+	# message = await bot.get_message(ctx.message.channel, id)
 	await message.unpin();
 	name = ctx.message.author.name
 	await ctx.send(ctx.message.author.mention + " unpinned a message by " + message.author.mention + ":\n" + message.content)
